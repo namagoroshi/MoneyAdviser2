@@ -17,9 +17,10 @@ public class ExpensesManager {
         System.out.println("Значение сохранено! Ваш текущий баланс в рублях: " + moneyBeforeSalary);
         // Замените на работу с таблицей
         if (expensesByCategories.containsKey(category)) { // Проверьте наличие категории
-            System.out.println(expensesByCategories.get(category)); // Получите список трат в этой категории
-            expensesByCategories.put(category, expenses.add(expense));// Добавьте трату
-            /*for (Double exp : expensesByCategories.get(category)){
+            System.out.println("Траты "+ expensesByCategories.get(category)); // Получите список трат в этой категории
+            expenses.add(expense);
+            expensesByCategories.put(category, expenses);// Добавьте трату
+            /*for (ArrayList<Double> exp : expensesByCategories.get(category)){  // так тоже не работает
                 exp.add(expense);
             }*/
         } else {
@@ -36,10 +37,15 @@ public class ExpensesManager {
 
     void printAllExpenses() {
         // Замените логику для работы с таблицами
-        for (String cat : expensesByCategories.keySet()) {
-            for (Double orderPrice : expensesByCategories.get(cat)) {
+        if(	expensesByCategories.isEmpty()){
+            System.out.println("Трат нет");
+        }else {
+            for (String cat : expensesByCategories.keySet()) {
+                System.out.println("Трата " + cat);
+                for (Double orderPrice : expensesByCategories.get(cat)) {
 
-                System.out.println("Трата № " + cat + ". Потрачено " + orderPrice + " рублей");
+                    System.out.println("Потрачено " + orderPrice + " рублей");
+                }
             }
         }
     }
@@ -60,9 +66,9 @@ public class ExpensesManager {
             }
         }return maxExpense;
     }
-        void removeAllExpenses () {
-            expenses.clear(); // Таблица называется иначе
-            System.out.println("Траты удалены.");
-        }
+    void removeAllExpenses () {
+        expensesByCategories.clear(); // Таблица называется иначе
+        System.out.println("Траты удалены.");
+    }
 
 }
